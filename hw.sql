@@ -83,11 +83,13 @@ WHERE last_name LIKE '%es%' and store_id = 1;
 -- 9. How many payment amounts (4.99, 5.99, etc.) had a number of rentals above 250 for customers ***
 -- with ids between 380 and 430? (use group by and having > 250)
 
-SELECT customer_id, amount
+SELECT amount, count(amount)
 from payment
-where customer_id BETWEEN 380 and 430 and amount > 250;
+where customer_id BETWEEN 380 and 430 
+group by amount
+having count(amount) > 250
 
--- zero payements with those requirements
+-- 3 payements with those requirements
 
 
 -- 10. Within the film table, how many rating categories are there? And what rating has the most
@@ -101,5 +103,3 @@ from film
 group by staff_id
 order by staff_id
 
-
--- there are 1001 
